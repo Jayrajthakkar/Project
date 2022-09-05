@@ -1,0 +1,79 @@
+<odoo>
+	<record id='view_book_tree' model='ir.ui.view'> 
+		 <field name="name">book.tree</field>
+         <field name="model">library.book</field>
+         <field name="arch" type="xml">
+         	<tree>
+         		<field name='book_name'/>
+         	</tree>
+         </field>
+	</record>
+
+	<record id='view_book_form' model='ir.ui.view'> 
+		 <field name="name">book.form</field>
+         <field name="model">library.book</field>
+         <field name="arch" type="xml">
+         	<form>	
+         		<sheet>
+         			<div name='button_box' class='oe_button_box'>
+						<button name="action_view_salescount" 
+							type = 'object'
+							class= "oe_stat_button" icon='fa-calendar'>
+							<div class='o_stat_info'>
+								<field name='total' class='o_stat_value'/>
+								<span class='o_stat_text'>Total</span>
+							</div>
+						</button>
+					</div>
+         			<button name="change_state" string="Move to Scrap" type="object" attrs = "{'invisible':[('state','=','scrapped')]}"/> 
+         			<field name='photo' widget='image' class='oe_avatar'/>
+         			<group>
+         			<field name='book_name'/>
+         			<field name='author'/>
+         			<field name='isbn'/>
+         			<field name='state'/>
+         			</group>
+         			<notebook>
+         				<page string = 'Sale History'>
+         					<field name='sale_history_ids'>
+         			
+         						<tree>
+			         				<field name='book_id'/>
+			         				<field name='visitor_id'/>
+			         				<field name='quantity'/>
+			         				<field name='price'/>
+			         				<field name='subtotal'/>
+         						</tree>
+         					</field>
+         			 	</page>
+         		    </notebook>
+         		</sheet>
+         	</form>
+         </field>
+	</record>
+
+
+#Action
+
+	<record id="action_book"
+		model="ir.actions.act_window">
+		<field name="name">Book</field>
+		<field name="res_model">library.book</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+
+#Menu
+
+	
+		<menuitem id = "library_main_menu" 
+			name ="Library" 
+			sequence = "0"/>
+
+		<menuitem id = "book_menu"
+				name = "Book"
+				parent="library_main_menu"
+				action="action_book"/>
+
+
+</odoo>
