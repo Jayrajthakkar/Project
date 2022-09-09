@@ -6,7 +6,7 @@
     'summary': 'Library Management',
     'sequence': 10,
     'description': """Library Management""",
-    'depends' : ['base'],
+    'depends' : ['base','mail'],
     'data': ['security/ir.model.access.csv',
              'views/visitor.xml',
              'views/library_management.xml',
